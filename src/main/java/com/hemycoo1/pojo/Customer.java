@@ -1,19 +1,23 @@
 package com.hemycoo1.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Enumeration;
 import java.util.Vector;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
     private String name;
-    private Vector rentals = new Vector();
+    private Vector<Rental> rentalVector = new Vector();
 
     public String statement(){
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        Enumeration rentals = getRentals().elements();
+        Enumeration rentals = getRentalVector().elements();
         String result = "Rental Record for " + getName() + "\n";
         while (rentals.hasMoreElements()){
             double thisAmount = 0;
