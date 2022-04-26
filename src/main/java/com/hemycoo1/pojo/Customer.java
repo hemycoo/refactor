@@ -25,11 +25,20 @@ public class Customer {
             frequentRenterPoints += each.getFrequentRenterPoints();
             //show figures for this rental
             result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
-            totalAmount += each.getCharge();
         }
         //add footer lines
-        result += "Amount owed is " + totalAmount + "\n";
+        result += "Amount owed is " + getTotalCharge() + "\n";
         result += "You earned " + frequentRenterPoints + " frequent renter points";
+        return result;
+    }
+
+    public double getTotalCharge(){
+        double result = 0;
+        Enumeration rentals = getRentalVector().elements();
+        while (rentals.hasMoreElements()){
+            Rental each = (Rental) rentals.nextElement();
+            result += each.getCharge();
+        }
         return result;
     }
 }
