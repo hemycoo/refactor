@@ -1,10 +1,8 @@
 package com.hemycoo1.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class Movie {
@@ -12,8 +10,10 @@ public class Movie {
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
 
+    @Getter
+    @Setter
     private String title;
-    private int priceCode;
+    private Price price;
 
     public double getCharge(int daysRented) {
         double thisAmount = 0.00;
@@ -40,6 +40,26 @@ public class Movie {
             return 2;
         } else {
             return 1;
+        }
+    }
+
+    public int getPriceCode(){
+        return price.getPriceCode();
+    }
+
+    public void setPriceCode(int arg) {
+        switch (arg) {
+            case REGULAR:
+                price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                price = new ChildrensPrice();
+                break;
+            case NEW_RELEASE:
+                price = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
         }
     }
 }
